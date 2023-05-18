@@ -36,3 +36,5 @@ This password generator unfortunately does not have a feature to copy the result
 There is no difference in security, of copying the result to clipboard, or putting the result into stdout.
 
 <sub>*(Copying to Clipboard is unsafe, as other applications can get whatever was copied to clipboard at any time.)*</sub>
+# LICENSE
+This application uses the MIT License.
