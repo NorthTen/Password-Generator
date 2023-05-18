@@ -23,7 +23,7 @@ This program is meant to be used **in** the terminal.
 
 So, go into the folder where the program is, and open up a terminal there.
 
-Look at the help menu to see the flags via `passwordgen --help` or `passwordgen -h`. The documentation is here, but I made sure the flag names indicate what they do, so you don't need to look here.
+Look at the help menu to see the flags via `passwordgen --help` or `passwordgen -h`.
 
 For generating secure passwords, I suggest the flag `--special-characters` and when specifying the length, have it above 50 if possible.
 
