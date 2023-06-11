@@ -19,6 +19,8 @@ It has multiple modes, that can alter the result it creates.
     - Add more variation into the result, making it even harder to guess.
 - **alphabetic-only**
     - Only use A-Z Characters, no digits, or special characters.
+- **hash-res**
+    - Hashes the result before outputting to terminal, using algorithm Sha3-256.
 ## How To Install
 Download from Releases. <sub>*Or just download the source, and download the [Nim](https://nim-lang.org) compiler, and compile the program yourself via `nimble install`.*</sub>
 ## How To Use
