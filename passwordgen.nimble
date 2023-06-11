@@ -1,6 +1,6 @@
 # Package
 
-version       = "1.1.1"
+version       = "1.2.1"
 author        = "RubyKyo"
 description   = "Password Generator. Has options to enable special characters, and to only generate a string with only digits, and etc. You can also change the length."
 license       = "MIT"
