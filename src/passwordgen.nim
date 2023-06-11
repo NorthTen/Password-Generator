@@ -49,29 +49,20 @@ proc passwordgen(
   const digit_alph = "0123456789";
 
   if (not digits_only):
-    while result.len()<=length:
-        if not lowercase_only: # not lowercase only
-          if alphabetic_only:
-            result.add(sample(regalpha));continue;
-          if special_characters:
-            result.add(sample(sc_alphabet));
-          else:
-            result.add(sample(alphabet));
-        else: #lowercase only
-          var alph=""; # temporary variable to utilize an alphabet variable
-          if special_characters:
-            alph=sc_alphabet;
-          else:
-            alph=alphabet;
-          if alphabetic_only:
-            alph=regalpha;
-          var ch = sample(alph);
-          ch = toLowerAscii(ch); # turn it lowercase using strutils.
-          result.add(ch);
+    while result.len()<=length: # not lowercase only
+        if alphabetic_only:
+          result.add(sample(regalpha));continue;
+        if special_characters:
+          result.add(sample(sc_alphabet));
+        else:
+          result.add(sample(alphabet));
   else:
     while result.len()<=length:
       result.add(sample(digit_alph))
   # handle the result.
+  if lowercase_only:
+    result=result.toLowerAscii() # convert to lowercase
+  
   if hash_res:
     result = $Sha3_256.secureHash(result) # char '$' returns the string representation of the Sha3Digest returned from secureHash.
 
