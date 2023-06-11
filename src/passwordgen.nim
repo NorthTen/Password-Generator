@@ -1,5 +1,6 @@
 import std/[sysrand,strutils];
 import cligen;
+import checksums/sha3;
 proc sample(strin:string):char = # Gets a random byte from system's entropy pool and tries to get an integer.
   var ch=' ';
   #while ((ints<0) or (ints>strin.len())):
@@ -30,6 +31,7 @@ proc passwordgen(
   lowercase_only:bool=false,
   special_characters:bool=false,
   alphabetic_only:bool=false,
+  hash_res:bool=false
   ) =
   ##A Password Generator, Username Generator, and PIN Generator. You make it how you want to. It is always recommended that you enable multi-factor authentication for whatever service, application, website you are using this program for.
   ##
@@ -70,6 +72,9 @@ proc passwordgen(
     while result.len()<=length:
       result.add(sample(digit_alph))
   # handle the result.
+  if hash_res:
+    result = $Sha3_256.secureHash(result) # char '$' returns the string representation of the Sha3Digest returned from secureHash.
+
   echo result; # print to stdout(terminal/console).
   return;
 
@@ -79,4 +84,5 @@ dispatch passwordgen,help={
   "lowercase_only":"Makes the output all lowercase, if possible.",
   "special_characters":"Add special characters into the output. This is a flag and not set by default because some services may not allow specific special characters.",
   "alphabetic_only":"Makes the output only alphabetic, no special characters.",
+  "hash_res":"Algorithm: Sha3_256. Hashes the result, resulting in a more complicated, un-guessable output. Could be used for something else."
   }

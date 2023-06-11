@@ -1,6 +1,6 @@
 # Package
 
-version       = "1.2.1"
+version       = "1.3.1"
 author        = "RubyKyo"
 description   = "Password Generator. Has options to enable special characters, and to only generate a string with only digits, and etc. You can also change the length."
 license       = "MIT"
@@ -9,4 +9,4 @@ bin           = @["passwordgen"]
 
 
 # Dependencies
-requires "nim >= 1.6.12","cligen == 1.6.2","nimcrypto == 0.5.4"
+requires "nim >= 1.6.12","cligen == 1.6.2","checksums == 0.1.0"

@@ -4,7 +4,7 @@ args="--opt:size --app:console --panics:on --mm:orc --backend:c --embedsrc:off -
 if [$1 -eq ""]
 then
     echo "no argument provided, defaulting to nimble build."
-    nimble build
+    platform="linux"
 else
     platform=$1
 fi
