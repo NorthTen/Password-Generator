@@ -3,8 +3,8 @@ mkdir -p out # Make directory out if it does not exist, if it does, continue.
 args="--opt:size --app:console --panics:on --mm:orc --backend:c --embedsrc:off --noNimblePath --panics:on -d:release --outdir:/out"
 if [$1 -eq ""]
 then
-    echo "no argument provided, defaulting to os: linux."
-    platform="linux"
+    echo "no argument provided, defaulting to nimble build."
+    nimble build
 else
     platform=$1
 fi

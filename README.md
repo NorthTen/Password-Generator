@@ -6,6 +6,9 @@ It is always recommended that you enable ***multi-factor authentication*** for w
 While the password may be unguessable to any human, there's always a chance of **security breaches, and brute-forcing by AI.**  Heed this warning, and enable **multi-factor authentication**.
 
 But it can be more than a Password Generator, also being a Username Generator (gibberish), and a PIN generator.
+# WARNING!
+## Versions below 1.1.1 are **INSECURE**!
+#
 ## Features
 It has multiple modes, that can alter the result it creates.
 - **digits-only**

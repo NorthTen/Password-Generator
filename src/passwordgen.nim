@@ -1,5 +1,27 @@
-import std/[random,strutils];
-import cligen
+import std/[sysrand,strutils];
+import cligen;
+proc sample(strin:string):char = # Gets a random byte from system's entropy pool and tries to get an integer.
+  var ch=' ';
+  #while ((ints<0) or (ints>strin.len())):
+  while true:
+    var rb = urandom(1)
+    var first_btye = rb[0]
+    var bytechar = first_btye.chr()
+    #echo "Char: "&bytechar
+    #if bytechar.isDigit():
+      #ints=int(bytechar)
+    if strin.find(bytechar) != -1:
+      ch=bytechar;
+      break
+
+  #echo "Int: "&ints.intToStr()
+
+  #return strin[ints]
+  return ch
+
+# Sample has 2 options.
+# The option we're using has it so we get a random character from the system's entropy pool, and if it's in the alphabet the code provided, we return it.
+# The second option is that we only retrieve integers from the entropy pool, and get whatever the character from the alphabet the integer gives us.
 
 
 proc passwordgen(length:int,digits_only:bool=false,lowercase_only:bool=false,special_characters:bool=false,alphabetic_only:bool=false) =
@@ -11,11 +33,13 @@ proc passwordgen(length:int,digits_only:bool=false,lowercase_only:bool=false,spe
   ##Or, if you need a randomly generated PIN, I suggest the --digits-only flag.
   ##
   ##Here are the flags below:
-  randomize(); # Initializes a random seed for 'random'.
+  var length=length-1 #Makes the result's length correct.
   var result="";
   const regalpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
   const alphabet = regalpha&"0123456789-+=."; # Concatenated with regalpha.
   const sc_alphabet = alphabet&"*&^%$#@[]{}'\";?,></\\"; # Concatenated with alphabet.
+  const digit_alph = "0123456789";
+
   if (not digits_only):
     while result.len()<=length:
         if not lowercase_only: # not lowercase only
@@ -38,7 +62,7 @@ proc passwordgen(length:int,digits_only:bool=false,lowercase_only:bool=false,spe
           result.add(ch);
   else:
     while result.len()<=length:
-      result.add(sample("1234567890"))
+      result.add(sample(digit_alph))
   # handle the result.
   echo result; # print to stdout(terminal/console).
   return;
