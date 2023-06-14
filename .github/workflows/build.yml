@@ -1,0 +1,123 @@
+name: build
+run-name: Building application(s) for multiple platforms.
+on:
+  push:
+    tags:
+      - "v*.*.*"
+jobs:
+  install-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Build
+        run: |
+          curl "https://nim-lang.org/download/nim-1.6.12-linux_x64.tar.xz" -O
+          tar -xf "./nim-1.6.12-linux_x64.tar.xz"
+          cd './nim-1.6.12'
+          export PATH="~/nim-1.6.12/bin:$PATH"
+          cd ../
+          nimble build
+      - name: Test
+        run: |
+          ./passwordgen -h
+          ./passwordgen -l=10
+          ./passwordgen -l=10 -s
+          ./passwordgen -l=10 -a
+          ./passwordgen -l=10 -d
+          ./passwordgen -l=10 --hash-res
+          ./passwordgen -l=10 --hash-res -o=hex
+          ./passwordgen -l=10 --hash-res -o=base64
+          ./passwordgen -l=10 -s --hash-res
+          ./passwordgen -l=10 -d --hash-res
+          ./passwordgen -l=10 -a --hash-res
+          ./passwordgen -l=10 -s --hash-res -o=hex
+          ./passwordgen -l=10 -s --hash-res -o=base64
+          ./passwordgen -l=10 -d --hash-res -o=hex
+          ./passwordgen -l=10 -d --hash-res -o=base64
+          ./passwordgen -l=10 -a --hash-res -o=hex
+          ./passwordgen -l=10 -a --hash-res -o=base64
+      - name: Release
+        uses: softprops/action-gh-release@v0.1.15
+        with:
+          files: |
+            passwordgen
+  install-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Build
+        run: |
+          curl "https://nim-lang.org/download/nim-1.6.12_x64.zip" -O
+          tar -xf ".\nim-1.6.12_x64.zip"
+          cd '.\nim-1.6.12'
+          finish.exe
+          SET PATH="$HOME\nim-1.6.12\bin"
+          cd ..\
+          nimble build
+      - name: Test
+        run: |
+          "passwordgen.exe" -h
+          "passwordgen.exe" -l=10
+          "passwordgen.exe" -l=10 -s
+          "passwordgen.exe" -l=10 -a
+          "passwordgen.exe" -l=10 -d
+          "passwordgen.exe" -l=10 --hash-res
+          "passwordgen.exe" -l=10 --hash-res -o=hex
+          "passwordgen.exe" -l=10 --hash-res -o=base64
+          "passwordgen.exe" -l=10 -s --hash-res
+          "passwordgen.exe" -l=10 -d --hash-res
+          "passwordgen.exe" -l=10 -a --hash-res
+          "passwordgen.exe" -l=10 -s --hash-res -o=hex
+          "passwordgen.exe" -l=10 -s --hash-res -o=base64
+          "passwordgen.exe" -l=10 -d --hash-res -o=hex
+          "passwordgen.exe" -l=10 -d --hash-res -o=base64
+          "passwordgen.exe" -l=10 -a --hash-res -o=hex
+          "passwordgen.exe" -l=10 -a --hash-res -o=base64
+      - name: Release
+        uses: softprops/action-gh-release@v0.1.15
+        with:
+          files: |
+            passwordgen.exe
+  install-macos:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Build
+        run: |
+          curl "https://nim-lang.org/download/nim-1.6.12-linux_x64.tar.xz" -O
+          tar -xf "./nim-1.6.12-linux_x64.tar.xz"
+          cd './nim-1.6.12'
+          export PATH="~/nim-1.6.12/bin:$PATH"
+          cd ../
+          nimble build
+      - name: Test
+        run: |
+          ./passwordgen -h
+          ./passwordgen -l=10
+          ./passwordgen -l=10 -s
+          ./passwordgen -l=10 -a
+          ./passwordgen -l=10 -d
+          ./passwordgen -l=10 --hash-res
+          ./passwordgen -l=10 --hash-res -o=hex
+          ./passwordgen -l=10 --hash-res -o=base64
+          ./passwordgen -l=10 -s --hash-res
+          ./passwordgen -l=10 -d --hash-res
+          ./passwordgen -l=10 -a --hash-res
+          ./passwordgen -l=10 -s --hash-res -o=hex
+          ./passwordgen -l=10 -s --hash-res -o=base64
+          ./passwordgen -l=10 -d --hash-res -o=hex
+          ./passwordgen -l=10 -d --hash-res -o=base64
+          ./passwordgen -l=10 -a --hash-res -o=hex
+          ./passwordgen -l=10 -a --hash-res -o=base64
+      - name: Release
+        uses: softprops/action-gh-release@v0.1.15
+        with:
+          files: |
+            passwordgen
+
+
+
+
