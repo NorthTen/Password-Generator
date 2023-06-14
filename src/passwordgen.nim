@@ -1,7 +1,7 @@
 import std/[sysrand,strutils];
 import cligen;
 import checksums/sha3;
-proc sample(strin:string):char = # Gets a random byte from system's entropy pool and tries to get an integer.
+proc sample(strin:string):char = # Retrieves a character from the system's entropy pool.
   var ch=' ';
   #while ((ints<0) or (ints>strin.len())):
   while true:
@@ -62,7 +62,7 @@ proc passwordgen(
   # handle the result.
   if lowercase_only:
     result=result.toLowerAscii() # convert to lowercase
-  
+
   if hash_res:
     result = $Sha3_256.secureHash(result) # char '$' returns the string representation of the Sha3Digest returned from secureHash.
 
