@@ -55,7 +55,7 @@ jobs:
           path: 'nim'
       - name: Build
         run: |
-          echo -e "y" | "nimble build"
+          "echo y | nimble build"
           echo $(ls)
       - name: Test
         run: |
