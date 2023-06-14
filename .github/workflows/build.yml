@@ -13,10 +13,9 @@ jobs:
       - name: Build
         run: |
           export BUILD_DIR=$PWD
-          curl "https://github.com/dom96/choosenim/releases/download/v0.8.4/choosenim-0.8.4_linux_amd64" -O
-          mv choosenim-0.8.4_linux_amd64 choosenim
-          chmod +x choosenim
-          ./choosenim stable
+          curl "https://nim-lang.org/download/nim-1.6.12-linux_x64.tar.xz" -O
+          tar -xf "./nim-1.6.12-linux_x64.tar.xz"
+          export PATH="$BUILD_DIR/nim-1.6.12/bin:$PATH"
           echo -e "y" | nimble install
           echo $(ls)
       - name: Test
@@ -51,9 +50,12 @@ jobs:
       - name: Build
         run: |
           SET BUILD_DIR=%CD%
-          curl "https://github.com/dom96/choosenim/releases/download/v0.8.4/choosenim-0.8.4_windows_amd64.exe" -O
-          mv choosenim-0.8.4_windows_amd64.exe choosenim.exe
-          choosenim.exe stable
+          curl "https://nim-lang.org/download/nim-1.6.12_x64.zip" -O
+          tar -xf ".\nim-1.6.12_x64.zip"
+          cd '.\nim-1.6.12\'
+          "finish.exe"
+          SET PATH="%PATH%;%BUILD_DIR%\nim-1.6.12\bin"
+          cd $BUILD_DIR
           echo -e "y" | nimble install
           echo $(ls)
       - name: Test
@@ -74,7 +76,7 @@ jobs:
           "passwordgen.exe -l=10 -d --hash-res -o=hex"
           "passwordgen.exe -l=10 -d --hash-res -o=base64"
           "passwordgen.exe -l=10 -a --hash-res -o=hex"
-          "passwordgen.exe -l=10 -a --hash-res -o=base64"
+          "passwordgen.exe -l=10 -a --hash-res -o=base64
       - name: Release
         uses: softprops/action-gh-release@v0.1.15
         with:
@@ -88,10 +90,9 @@ jobs:
       - name: Build
         run: |
           export BUILD_DIR=$PWD
-          curl "https://github.com/dom96/choosenim/releases/download/v0.8.4/choosenim-0.8.4_macosx_amd64" -O
-          mv choosenim-0.8.4_macosx_amd64 choosenim
-          chmod +x choosenim
-          ./choosenim stable
+          curl "https://nim-lang.org/download/nim-1.6.12-linux_x64.tar.xz" -O
+          tar -xf "./nim-1.6.12-linux_x64.tar.xz"
+          export PATH="$BUILD_DIR/nim-1.6.12/bin:$PATH"
           echo -e "y" | nimble install
           echo $(ls)
       - name: Test
