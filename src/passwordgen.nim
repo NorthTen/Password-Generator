@@ -1,7 +1,7 @@
 import std/[sysrand,strutils];
 import cligen;
 import checksums/sha3;
-proc sample(strin:string):char = # Gets a character from the system's entropy pool.
+proc sample(strin:string):char = # Retrieves a character from the system's entropy pool.
   var ch=' ';
   #while ((ints<0) or (ints>strin.len())):
   while true:
