@@ -80,7 +80,7 @@ proc passwordgen(
 
 dispatch passwordgen,help={
   "length":"Set how many characters to generate.",
-  "digits_only":"Makes the output only digits 0-9. No alphabetical characters will be in the output.",
+  "digits_only":"Makes the output only digits/numbers. No alphabetical characters will be in the output.",
   "lowercase_only":"Makes the output all lowercase, if possible.",
   "special_characters":"Add special characters into the output. This is a flag and not set by default because some services may not allow specific special characters.",
   "alphabetic_only":"Makes the output only alphabetic, no special characters.",

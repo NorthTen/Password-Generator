@@ -12,7 +12,7 @@ But it can be more than a Password Generator, also being a Username Generator (g
 ## Features
 It has multiple modes, that can alter the result it creates.
 - **digits-only**
-    - Only generate a password using digits.
+    - Only outputs numbers, no alphabetical characters nor special characters.
 - **lowercase-only**
     - Makes all alphabetic characters lowercase.
 - **special-characters**
@@ -21,6 +21,9 @@ It has multiple modes, that can alter the result it creates.
     - Only use A-Z Characters, no digits, or special characters.
 - **hash-res**
     - Hashes the result before outputting to terminal, using algorithm Sha3-256.
+- **output-type**
+    - Transforms the result into a specific format. Default is raw (No formatting applied).
+        - Values: ``raw|hex|base64``
 ## How To Install
 Download from Releases. <sub>*Or just download the source, and download the [Nim](https://nim-lang.org) compiler, and compile the program yourself via `nimble install`.*</sub>
 ## How To Use
