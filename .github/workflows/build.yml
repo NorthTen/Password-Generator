@@ -58,23 +58,23 @@ jobs:
           echo $(ls)
       - name: Test
         run: |
-          "passwordgen.exe" -h
-          "passwordgen.exe" -l=10
-          "passwordgen.exe" -l=10 -s
-          "passwordgen.exe" -l=10 -a
-          "passwordgen.exe" -l=10 -d
-          "passwordgen.exe" -l=10 --hash-res
-          "passwordgen.exe" -l=10 --hash-res -o=hex
-          "passwordgen.exe" -l=10 --hash-res -o=base64
-          "passwordgen.exe" -l=10 -s --hash-res
-          "passwordgen.exe" -l=10 -d --hash-res
-          "passwordgen.exe" -l=10 -a --hash-res
-          "passwordgen.exe" -l=10 -s --hash-res -o=hex
-          "passwordgen.exe" -l=10 -s --hash-res -o=base64
-          "passwordgen.exe" -l=10 -d --hash-res -o=hex
-          "passwordgen.exe" -l=10 -d --hash-res -o=base64
-          "passwordgen.exe" -l=10 -a --hash-res -o=hex
-          "passwordgen.exe" -l=10 -a --hash-res -o=base64
+          "passwordgen.exe -h"
+          "passwordgen.exe -l=10"
+          "passwordgen.exe -l=10 -s"
+          "passwordgen.exe -l=10 -a"
+          "passwordgen.exe -l=10 -d"
+          "passwordgen.exe -l=10 --hash-res"
+          "passwordgen.exe -l=10 --hash-res -o=hex"
+          "passwordgen.exe -l=10 --hash-res -o=base64"
+          "passwordgen.exe -l=10 -s --hash-res"
+          "passwordgen.exe -l=10 -d --hash-res"
+          "passwordgen.exe -l=10 -a --hash-res"
+          "passwordgen.exe -l=10 -s --hash-res -o=hex"
+          "passwordgen.exe -l=10 -s --hash-res -o=base64"
+          "passwordgen.exe -l=10 -d --hash-res -o=hex"
+          "passwordgen.exe -l=10 -d --hash-res -o=base64"
+          "passwordgen.exe -l=10 -a --hash-res -o=hex"
+          "passwordgen.exe -l=10 -a --hash-res -o=base64"
       - name: Release
         uses: softprops/action-gh-release@v0.1.15
         with:
