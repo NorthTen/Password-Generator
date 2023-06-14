@@ -1,4 +1,4 @@
-import std/[sysrand,strutils];
+import std/[sysrand,strutils,base64];
 import cligen;
 import checksums/sha3;
 proc sample(strin:string):char = # Retrieves a character from the system's entropy pool.
@@ -31,7 +31,8 @@ proc passwordgen(
   lowercase_only:bool=false,
   special_characters:bool=false,
   alphabetic_only:bool=false,
-  hash_res:bool=false
+  hash_res:bool=false,
+  output_type:string="raw"
   ) =
   ##A Password Generator, Username Generator, and PIN Generator. You make it how you want to. It is always recommended that you enable multi-factor authentication for whatever service, application, website you are using this program for.
   ##
@@ -42,6 +43,8 @@ proc passwordgen(
   ##
   ##Here are the flags below:
   var length=length-1 #Makes the result's length correct.
+  var output_type=output_type.toLower()
+
   var result="";
   const regalpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
   const alphabet = regalpha&"0123456789-+=."; # Concatenated with regalpha.
@@ -61,19 +64,26 @@ proc passwordgen(
       result.add(sample(digit_alph))
   # handle the result.
   if lowercase_only:
-    result=result.toLowerAscii() # convert to lowercase
+    result=result.toLower() # convert to lowercase
 
   if hash_res:
     result = $Sha3_256.secureHash(result) # char '$' returns the string representation of the Sha3Digest returned from secureHash.
+
+  if output_type=="hex":
+    result=result.toHex();
+
+  if output_type=="base64":
+    result=result.encode();
 
   echo result; # print to stdout(terminal/console).
   return;
 
 dispatch passwordgen,help={
   "length":"Set how many characters to generate.",
-  "digits_only":"Makes the output only numbers 0-9. No alphabetical characters will be in the output.",
+  "digits_only":"Makes the output only digits/numbers. No alphabetical characters will be in the output.",
   "lowercase_only":"Makes the output all lowercase, if possible.",
   "special_characters":"Add special characters into the output. This is a flag and not set by default because some services may not allow specific special characters.",
   "alphabetic_only":"Makes the output only alphabetic, no special characters.",
-  "hash_res":"Algorithm: Sha3_256. Hashes the result, resulting in a more complicated, un-guessable output. Could be used for something else."
+  "hash_res":"Algorithm: Sha3_256. Hashes the result, resulting in a more complicated, un-guessable output. Could be used for something else.",
+  "output_type":"Should the result be in Hex format, or Base64 format, etc. Default is raw (No format applied). Values: raw|base64|hex"
   }
