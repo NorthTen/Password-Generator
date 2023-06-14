@@ -10,6 +10,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - name: Install Nim
         uses: alaviss/setup-nim@0.1.0
         with:
@@ -43,11 +45,14 @@ jobs:
         with:
           files: |
             passwordgen
+          generate_release_notes: true
   install-windows:
     runs-on: windows-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - name: Install Nim
         uses: alaviss/setup-nim@0.1.0
         with:
@@ -81,11 +86,14 @@ jobs:
         with:
           files: |
             passwordgen.exe
+          generate_release_notes: true
   install-macos:
     runs-on: macos-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - name: Install Nim
         uses: alaviss/setup-nim@0.1.0
         with:
@@ -120,3 +128,4 @@ jobs:
         with:
           files: |
             passwordgen_mac
+          generate_release_notes: true
