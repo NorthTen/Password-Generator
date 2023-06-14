@@ -1,5 +1,5 @@
 name: build
-run-name: Building application(s) for multiple platforms.
+run-name: Building application(s) for multiple platforms. 
 on:
   push:
     tags:
