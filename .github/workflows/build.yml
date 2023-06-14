@@ -13,10 +13,11 @@ jobs:
       - name: Build
         run: |
           export BUILD_DIR=$PWD
-          curl "https://nim-lang.org/download/nim-1.6.12-linux_x64.tar.xz" -O
-          tar -xf "./nim-1.6.12-linux_x64.tar.xz"
-          export PATH="$BUILD_DIR/nim-1.6.12/bin:$PATH"
-          echo -e "y" | nimble build
+          curl "https://github.com/dom96/choosenim/releases/download/v0.8.4/choosenim-0.8.4_linux_amd64" -O
+          mv choosenim-0.8.4_linux_amd64 choosenim
+          chmod +x choosenim
+          ./choosenim stable
+          echo -e "y" | nimble install
           echo $(ls)
       - name: Test
         run: |
@@ -50,12 +51,10 @@ jobs:
       - name: Build
         run: |
           SET BUILD_DIR=%CD%
-          curl "https://nim-lang.org/download/nim-1.6.12_x64.zip" -O
-          tar -xf ".\nim-1.6.12_x64.zip"
-          cd '.\nim-1.6.12\'
-          "finish.exe"
-          SET PATH="%PATH%;%BUILD_DIR%\nim-1.6.12\bin"
-          cd $BUILD_DIR
+          curl "https://github.com/dom96/choosenim/releases/download/v0.8.4/choosenim-0.8.4_windows_amd64.exe" -O
+          mv choosenim-0.8.4_windows_amd64.exe choosenim.exe
+          choosenim.exe stable
+          echo -e "y" | nimble install
           echo $(ls)
       - name: Test
         run: |
@@ -89,10 +88,11 @@ jobs:
       - name: Build
         run: |
           export BUILD_DIR=$PWD
-          curl "https://nim-lang.org/download/nim-1.6.12-linux_x64.tar.xz" -O
-          tar -xf "./nim-1.6.12-linux_x64.tar.xz"
-          export PATH="$BUILD_DIR/nim-1.6.12/bin:$PATH"
-          echo -e "y" | nimble build
+          curl "https://github.com/dom96/choosenim/releases/download/v0.8.4/choosenim-0.8.4_macosx_amd64" -O
+          mv choosenim-0.8.4_macosx_amd64 choosenim
+          chmod +x choosenim
+          ./choosenim stable
+          echo -e "y" | nimble install
           echo $(ls)
       - name: Test
         run: |
