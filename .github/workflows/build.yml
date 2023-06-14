@@ -80,7 +80,7 @@ jobs:
           "passwordgen.exe -l=10 -d --hash-res -o=hex"
           "passwordgen.exe -l=10 -d --hash-res -o=base64"
           "passwordgen.exe -l=10 -a --hash-res -o=hex"
-          "passwordgen.exe -l=10 -a --hash-res -o=base64
+          "passwordgen.exe -l=10 -a --hash-res -o=base64"
       - name: Release
         uses: softprops/action-gh-release@v0.1.15
         with:
