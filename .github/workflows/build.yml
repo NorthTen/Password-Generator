@@ -10,12 +10,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Install Nim
+        uses: alaviss/setup-nim@0.1.0
+        with:
+          version: 'version-1-9'
+          path: 'nim'
       - name: Build
         run: |
-          export BUILD_DIR=$PWD
-          curl "https://nim-lang.org/download/nim-1.6.12-linux_x64.tar.xz" -O
-          tar -xf "./nim-1.6.12-linux_x64.tar.xz"
-          export PATH="$BUILD_DIR/nim-1.6.12/bin:$PATH"
           echo -e "y" | nimble install
           echo $(ls)
       - name: Test
@@ -47,16 +48,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Install Nim
+        uses: alaviss/setup-nim@0.1.0
+        with:
+          version: 'version-1-9'
+          path: 'nim'
       - name: Build
         run: |
-          SET BUILD_DIR=%CD%
-          curl "https://nim-lang.org/download/nim-1.6.12_x64.zip" -O
-          tar -xf ".\nim-1.6.12_x64.zip"
-          cd '.\nim-1.6.12\'
-          "finish.exe"
-          SET PATH="%PATH%;%BUILD_DIR%\nim-1.6.12\bin"
-          cd $BUILD_DIR
-          echo -e "y" | nimble install
+          echo -e "y" | "nimble build"
           echo $(ls)
       - name: Test
         run: |
@@ -87,35 +86,37 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Install Nim
+        uses: alaviss/setup-nim@0.1.0
+        with:
+          version: 'version-1-9'
+          path: 'nim'
       - name: Build
         run: |
-          export BUILD_DIR=$PWD
-          curl "https://nim-lang.org/download/nim-1.6.12-linux_x64.tar.xz" -O
-          tar -xf "./nim-1.6.12-linux_x64.tar.xz"
-          export PATH="$BUILD_DIR/nim-1.6.12/bin:$PATH"
           echo -e "y" | nimble install
+          mv passwordgen passwordgen_mac
           echo $(ls)
       - name: Test
         run: |
-          ./passwordgen -h
-          ./passwordgen -l=10
-          ./passwordgen -l=10 -s
-          ./passwordgen -l=10 -a
-          ./passwordgen -l=10 -d
-          ./passwordgen -l=10 --hash-res
-          ./passwordgen -l=10 --hash-res -o=hex
-          ./passwordgen -l=10 --hash-res -o=base64
-          ./passwordgen -l=10 -s --hash-res
-          ./passwordgen -l=10 -d --hash-res
-          ./passwordgen -l=10 -a --hash-res
-          ./passwordgen -l=10 -s --hash-res -o=hex
-          ./passwordgen -l=10 -s --hash-res -o=base64
-          ./passwordgen -l=10 -d --hash-res -o=hex
-          ./passwordgen -l=10 -d --hash-res -o=base64
-          ./passwordgen -l=10 -a --hash-res -o=hex
-          ./passwordgen -l=10 -a --hash-res -o=base64
+          ./passwordgen_mac -h
+          ./passwordgen_mac -l=10
+          ./passwordgen_mac -l=10 -s
+          ./passwordgen_mac -l=10 -a
+          ./passwordgen_mac -l=10 -d
+          ./passwordgen_mac -l=10 --hash-res
+          ./passwordgen_mac -l=10 --hash-res -o=hex
+          ./passwordgen_mac -l=10 --hash-res -o=base64
+          ./passwordgen_mac -l=10 -s --hash-res
+          ./passwordgen_mac -l=10 -d --hash-res
+          ./passwordgen_mac -l=10 -a --hash-res
+          ./passwordgen_mac -l=10 -s --hash-res -o=hex
+          ./passwordgen_mac -l=10 -s --hash-res -o=base64
+          ./passwordgen_mac -l=10 -d --hash-res -o=hex
+          ./passwordgen_mac -l=10 -d --hash-res -o=base64
+          ./passwordgen_mac -l=10 -a --hash-res -o=hex
+          ./passwordgen_mac -l=10 -a --hash-res -o=base64
       - name: Release
         uses: softprops/action-gh-release@v0.1.15
         with:
           files: |
-            passwordgen
+            passwordgen_mac
